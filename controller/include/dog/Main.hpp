@@ -20,6 +20,9 @@ namespace Dog {
     /// Performs the USARTs initialization.
     void __InitializeUSARTs (void) noexcept;
 
+    /// Performs the ETHs initializtion.
+    void __InitializeETHs (void) noexcept;
+
     Main (void) noexcept;
     ~Main (void) noexcept = default;
 

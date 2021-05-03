@@ -23,6 +23,7 @@ namespace Dog {
 
     /// Initializes the specific hardware.
     Main::__InitializeUSARTs ();
+    Main::__InitializeETHs ();
 
     /// Prints to the serial console that we're done initializing.
     USARTs::I1.WriteBytes ((const u8 *)"Hello World\r\n", 13);
@@ -73,6 +74,11 @@ namespace Dog {
     USARTs::I2.Reset ();
     USARTs::I2.SetBaud (921600UL);
     USARTs::I2.EnableAll ();              // Sets UE, TE and RE
+  }
+
+  /// Performs the ETHs initializtion.
+  void Main::__InitializeETHs (void) noexcept {
+    using namespace Peripherals;
   }
 
   Main Main::INSTANCE;
