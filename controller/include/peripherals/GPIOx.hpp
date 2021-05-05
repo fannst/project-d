@@ -70,6 +70,9 @@ namespace Peripherals {
         inline bool IsLow (u8 pin) const noexcept {
             return !IsHigh (pin);
         }
+
+        inline GPIO_TypeDef *GetGPIO (void) noexcept
+        { return m_GPIO; }
     protected:
         friend class GPIOs;
 

@@ -1,5 +1,7 @@
 #include "types.hpp"
 #include "protocols/USARTDebug.hpp"
+#include "drivers/Buzzer.hpp"
+#include "drivers/ServoCluster.hpp"
 
 #pragma once
 
@@ -14,14 +16,24 @@ namespace Dog {
 
     /// Performs the driver initialization.
     void InitializeDrivers (void) noexcept;
+
+    /// The loop method.
+    void Loop (void) noexcept;
   private:
-    Protocols::Debug::USARTTransmittingSession m_DebugUSART;
+    Drivers::Buzzer m_Buzzer;
+    Drivers::ServoCluster m_Paw1;
 
     /// Performs the USARTs initialization.
     void __InitializeUSARTs (void) noexcept;
 
     /// Performs the ETHs initializtion.
     void __InitializeETHs (void) noexcept;
+
+    /// Performs status indicator initialization.
+    void __InitializeStatusIndicators (void) noexcept;
+
+    /// Initializes the servos.
+    void __InitializeServos (void) noexcept;
 
     Main (void) noexcept;
     ~Main (void) noexcept = default;

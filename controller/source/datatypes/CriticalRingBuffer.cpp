@@ -33,12 +33,12 @@ namespace Datatypes {
 
   /// Pushes N bytes onto the ring buffer.
   [[ maybe_unused ]] CriticalRingBufferError CriticalRingBuffer::PushMany (const u8 *bytes, u32 n) noexcept {
-    if ((m_Size + n) > m_Capacity) [[ unlikely ]] {
+    if ((m_Size + n) > m_Capacity) {
       return CriticalRingBufferError::Overflow;
     }
     
     for (u32 i = 0; i < n; ++i) {
-      if (Push (bytes[i]) == CriticalRingBufferError::Overflow) [[ unlikely ]] {
+      if (Push (bytes[i]) == CriticalRingBufferError::Overflow) {
         return CriticalRingBufferError::Overflow;
       }
     }
@@ -50,7 +50,7 @@ namespace Datatypes {
   [[ maybe_unused ]] CriticalRingBufferError CriticalRingBuffer::Pop (u8 *byte) noexcept {
     Lock ();
     
-    if (m_Size == 0) [[ unlikely ]] {
+    if (m_Size == 0) {
       return CriticalRingBufferError::Underflow;
     }
 
@@ -65,12 +65,12 @@ namespace Datatypes {
 
   /// Pops many bytes off the ring buffer.
   [[ maybe_unused ]] CriticalRingBufferError CriticalRingBuffer::PopMany (u8 *bytes, u32 n) noexcept {
-    if (n > m_Size) [[ unlikely ]] {
+    if (n > m_Size) {
       return CriticalRingBufferError::Underflow;
     }
 
     for (u32 i = 0; i < n; ++i) {
-      if (Pop (&bytes[i]) == CriticalRingBufferError::Underflow) [[ unlikely ]] {
+      if (Pop (&bytes[i]) == CriticalRingBufferError::Underflow) {
         return CriticalRingBufferError::Underflow;
       }
     }
@@ -92,7 +92,7 @@ namespace Datatypes {
   [[ maybe_unused ]] CriticalRingBufferError TempRead_CriticalRingBuffer::TempPop (u8 *byte) noexcept {
     Lock ();
     
-    if (m_TempRead == m_Write) [[ unlikely ]] {
+    if (m_TempRead == m_Write) {
       return CriticalRingBufferError::Underflow;
     }
 
@@ -106,7 +106,7 @@ namespace Datatypes {
   /// Pops many bytes off the ring buffer.
   [[ maybe_unused ]] CriticalRingBufferError TempRead_CriticalRingBuffer::TempPopMany (u8 *bytes, u32 n) noexcept {
     for (u32 i = 0; i < n; ++i) {
-      if (Pop (&bytes[i]) == CriticalRingBufferError::Underflow) [[ unlikely ]] {
+      if (Pop (&bytes[i]) == CriticalRingBufferError::Underflow) {
         return CriticalRingBufferError::Underflow;
       }
     }
